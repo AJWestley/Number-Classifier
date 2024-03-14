@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import tkinter as tk
 from tkinter import ttk
@@ -84,6 +85,7 @@ class DigitClassApp:
         self.probs = self.classifier.predict_probabilities(img)
         self.prediction = self.classifier.predict(img)
         self.update_prediction_labels()
+        os.remove(filename)
     
     def update_prediction_labels(self):
         self.prediction_label['text'] = f"Prediction: {self.prediction}"
