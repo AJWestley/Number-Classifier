@@ -20,7 +20,7 @@ class DigitClassApp:
     def setup_tools(self):
         self.selected_tool = "pen"
         self.selected_color = "black"
-        self.selected_size = 40
+        self.selected_size = 35
 
         self.tool_frame = ttk.LabelFrame(self.root, text='Predictions')
         self.tool_frame.pack(side=tk.RIGHT, padx=5, pady=5, fill=tk.Y)
@@ -66,7 +66,7 @@ class DigitClassApp:
     def draw(self, event):
         if self.selected_tool == "pen":
             if self.prev_x is not None and self.prev_y is not None:
-                self.canvas.create_rectangle(self.prev_x, self.prev_y, event.x, event.y, fill=self.selected_color, width=self.selected_size)
+                self.canvas.create_oval(self.prev_x, self.prev_y, event.x, event.y, fill=self.selected_color, width=self.selected_size)
             self.prev_x = event.x
             self.prev_y = event.y
 
