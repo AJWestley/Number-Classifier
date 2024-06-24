@@ -1,10 +1,10 @@
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 from pickle import load
 
 class DigitClassifier:
     def __init__(self, model_path: str) -> None:
-        self.__model: LogisticRegression = None
+        self.__model: MLPClassifier = None
         self.load_model(model_path)
     
     def predict_probabilities(self, img: np.ndarray) -> np.ndarray:
