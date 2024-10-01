@@ -16,7 +16,7 @@ class DigitClassApp:
         self.setup_events()
         self.prev_x = None
         self.prev_y = None
-        self.classifier = DigitClassifier('model.dat')
+        self.classifier = DigitClassifier('model.keras')
 
     def setup_tools(self):
         self.selected_tool = "pen"

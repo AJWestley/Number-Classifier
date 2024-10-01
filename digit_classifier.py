@@ -1,22 +1,21 @@
 import numpy as np
-from sklearn.neural_network import MLPClassifier
 from pickle import load
+import tensorflow as tf
 
 class DigitClassifier:
     def __init__(self, model_path: str) -> None:
-        self.__model: MLPClassifier = None
-        self.load_model(model_path)
+        self.__model = tf.keras.models.load_model(model_path)
     
     def predict_probabilities(self, img: np.ndarray) -> np.ndarray:
-        flat_img = self.png_to_flat_mnist(img)
-        return self.__model.predict_proba(flat_img)[0]
+        img = self.transform(img)
+        return self.__model.predict(img)[0]
     
     def predict(self, img: np.ndarray):
-        flat_img = self.png_to_flat_mnist(img)
-        return self.__model.predict(flat_img)[0]
+        img = self.transform(img)
+        return np.argmax(self.__model.predict(img)[0])
     
-    def png_to_flat_mnist(self, img: np.ndarray) -> np.ndarray:
-        return ((255 - img) / 255).reshape((1, -1))
+    def transform(self, img: np.ndarray) -> np.ndarray:
+        return ((255 - img) / 255).reshape(-1, 28, 28, 1)
     
     def load_model(self, filepath: str):
         with open(filepath, 'rb') as mfile:
